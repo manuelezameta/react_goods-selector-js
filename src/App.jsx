@@ -16,16 +16,16 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGoods, setSelectedGoods] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const getButton = good => {
-    if (good === selectedGoods) {
+  const calculateButton = good => {
+    if (good === selectedGood) {
       return (
         <button
           data-cy="RemoveButton"
           type="button"
           className="button is-info"
-          onClick={() => setSelectedGoods(undefined)}
+          onClick={() => setSelectedGood('')}
         >
           -
         </button>
@@ -37,7 +37,7 @@ export const App = () => {
         data-cy="AddButton"
         type="button"
         className="button"
-        onClick={() => setSelectedGoods(good)}
+        onClick={() => setSelectedGood(good)}
       >
         +
       </button>
@@ -46,18 +46,18 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGoods === undefined ? (
+      {selectedGood === '' ? (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGoods} is selected
+          {selectedGood} is selected
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGoods(undefined)}
+            onClick={() => setSelectedGood('')}
           />
         </h1>
       )}
@@ -69,10 +69,10 @@ export const App = () => {
               key={good}
               data-cy="Good"
               className={
-                good === selectedGoods ? 'has-background-success-light' : ''
+                good === selectedGood ? 'has-background-success-light' : ''
               }
             >
-              <td>{getButton(good)}</td>
+              <td>{calculateButton(good)}</td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
               </td>
